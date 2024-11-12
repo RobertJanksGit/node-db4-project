@@ -4,11 +4,14 @@
  */
 exports.up = async function (knex) {
   await knex.schema
-    .createTable("recipes", (table) => {
-      table.increments();
+    .createTable("recipes", (recipe) => {
+      recipe.increments("recipe_id");
+      recipe.string("recipe_name", 200).notNullable().unique();
     })
-    .createTable("ingredients", (table) => {
-      table.increments();
+    .createTable("ingredients", (ingredient) => {
+      ingredient.increments("ingredient_id");
+      ingredient.string("ingredient_name", 200).notNullable().unique();
+      ingredient.string("ingredient_unit", 50);
     })
     .createTable("steps", (table) => {
       table.increments();
